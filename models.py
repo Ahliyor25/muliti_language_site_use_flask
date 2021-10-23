@@ -39,7 +39,7 @@ class Slider(BaseModel):
     img = CharField(max_length=256)
     lang_id = ForeignKeyField(Lang, related_name="sliders",)
 
-class Advantage(BaseModel):
+class SectionThree(BaseModel):
     id= AutoField()
     title = CharField(max_length=255)
     icon = CharField(max_length=255)

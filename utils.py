@@ -15,7 +15,7 @@ from werkzeug.utils import find_modules, import_string
 
 
 class helper_var:
-    host = "http://192.168.0.108:3000/getimg/"
+    host = "http://192.168.0.107:3000/getimg/"
     path = 'C:\\mbc\\'
 
 

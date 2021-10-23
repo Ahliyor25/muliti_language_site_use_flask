@@ -3,27 +3,28 @@ from flask import  jsonify, request
 from flask import Blueprint
 from flask_jwt_extended.view_decorators import jwt_required
 from peewee import DoesNotExist
-from models import SectionThree, Lang, Slider
+from models import SectionThree, Lang, SectionThree, Slider
 from utils import helper_var, upload_image
 import os
 
-bp = Blueprint('advantage',__name__, url_prefix = '/advantage')
+bp = Blueprint('section_three',__name__, url_prefix = '/section_three')
 
 host  = helper_var.host
 
 @bp.post('/')
 @jwt_required()
-def CreateAdvantage():
+def CreateSectionThree():
 	
+	
+	img = request.files.getlist('img')
 	_title = request.form.get('title')
-	icon = request.files.getlist('icon')
 	_des = request.form.get('des')
 	_lang_id = request.form.get('lang_id')
 	
 	try:
-		_icon = upload_image(icon)
+		_img = upload_image(img)
 
-		row = SectionThree(title = _title, icon = _icon, des = _des, lang_id = _lang_id)
+		row = SectionThree(title = _title, img = _img, des = _des, lang_id = _lang_id)
 
 		row.save()
 	
@@ -35,15 +36,15 @@ def CreateAdvantage():
 def GetAdvantage():
 	
 	try:
-		advantage = SectionThree.select()
+		sectionThree = SectionThree.select()
 		
 		js = []
 	
-		for i in advantage:
+		for i in sectionThree:
 			js.append({
 				"id" : i.id,
 				"title": i.title,
-				"icon": host + i.icon,
+				"img": host + i.img,
 				"des" : i.des,
 				"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
@@ -53,30 +54,29 @@ def GetAdvantage():
 		return '{}'.format(e)
 
 @bp.put('/<id>')
-def UpAdvantage(id):
+@jwt_required()
+def UpSectionThree(id):
 	
 	try:
-		advantage = SectionThree.get(SectionThree.id == id)
+		sectionThree = SectionThree.get(SectionThree.id == id)
 	except DoesNotExist:
 		return({"msg":"Не найден Слайдер по такому id"})
-
 	try:
 		
-		advantage.title  = request.form.get('name')
-		icon =   request.files.getlist('icon')
-		advantage.des  = request.form.get('des')
-		advantage.lang_id = request.form.get('lang_id')
+		sectionThree.title  = request.form.get('title')
+		img =   request.files.getlist('img')
+		SectionThree.des  = request.form.get('des')
+		SectionThree.lang_id = request.form.get('lang_id')
 		
 	
-		if len(icon) == 0:
-			advantage.save()
+		if len(img) == 0:
+			sectionThree.save()
 			return jsonify('done')
-		os.remove(helper_var.path + 'images/' + advantage.icon)
 		
-		_icon = upload_image(icon)
+		_img = upload_image(img)
 	
-		advantage.icon = _icon
-		advantage.save()
+		sectionThree.img = _img
+		sectionThree.save()
 	
 		response = jsonify('done')
 		return response
@@ -86,16 +86,17 @@ def UpAdvantage(id):
 
 
 @bp.delete('/<id>')
-def DeleteSlider(id):
+@jwt_required()
+def DeleteUpSectionThree(id):
 	try:
-		advantage = SectionThree.get(SectionThree.id == id)
+		sectionThree = SectionThree.get(SectionThree.id == id)
 	except DoesNotExist:
 		return({"msg":"Не найден проект по такому id"})	
 	try:
-		img_path = helper_var.path+'images/'+ advantage.icon
-		if advantage.icon is not  None:
+		img_path = helper_var.path+'images/'+ sectionThree.img
+		if sectionThree.img is not  None:
 			os.remove(img_path)
-		advantage.delete_instance()
+		sectionThree.delete_instance()
 		return jsonify({"msg" : "Done"})
 	except Exception as e:
 		return '{}'.format(e)

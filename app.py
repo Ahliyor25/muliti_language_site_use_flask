@@ -23,7 +23,7 @@ app.secret_key = 'LPOI(U*((IU*&T^YHJKOL:>:<LjidnkjiuwefjiTFRDES).<mjhuio'
 CORS(app)
 jwt = JWTManager(app)
 app.jwt_secret_key = 'aoaoaoaoaoaoaooaaooaoaoaoa'
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=48)
 
 register_blueprints_login(app)
 register_blueprints_main_page(app)
