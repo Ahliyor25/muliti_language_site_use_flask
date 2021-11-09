@@ -22,7 +22,7 @@ def CreateSectionFour():
 	_youtube_button_text = request.form.get('youtube_button_text')
 	_text_advantage = request.form.get('text_advantage')
 	_text_button = request.form.get('text_button')
-	_lang_id = request.form.get('lang_id')
+	#_lang_id = request.form.get('lang_id')
 
 	try:
 		
@@ -34,7 +34,7 @@ def CreateSectionFour():
 		youtube_button_text = _youtube_button_text,
 		text_advantage = _text_advantage,
 		text_button = _text_button,
-		lang_id = _lang_id
+		#lang_id = _lang_id
 		)
 
 		row.save()
@@ -60,7 +60,7 @@ def GetSectionFour():
 				"youtube_button_text" : i.youtube_button_text,
 				"text_advantage" : i.text_advantage,
 				"text_button" : i.text_button,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -80,7 +80,7 @@ def UpSectionFour(id):
 		sectionFour.title  = request.form.get('title')
 		img =   request.files.getlist('img')
 		sectionFour.des  = request.form.get('des')
-		sectionFour.lang_id = request.form.get('lang_id')
+		#sectionFour.lang_id = request.form.get('lang_id')
 		sectionFour.youtube_button_text = request.form.get('youtube_button_text')
 		sectionFour.text_advantage = request.form.get('text_advantage')
 		sectionFour.text_button = request.form.get('text_button')

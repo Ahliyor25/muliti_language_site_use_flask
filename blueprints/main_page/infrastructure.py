@@ -20,7 +20,7 @@ def Create():
 	_title = request.form.get('title')
 	_des = request.form.get('des')
 	
-	_lang_id = request.form.get('lang_id')
+	#_lang_id = request.form.get('lang_id')
 
 	try:
 		
@@ -29,7 +29,7 @@ def Create():
 		title = _title,
 		img = _img,
 		des = _des,
-		lang_id = _lang_id
+		#lang_id = _lang_id
 		)
 
 		row.save()
@@ -53,7 +53,7 @@ def Get():
 				"title": i.title,
 				"img": host + i.img,
 				"des" : i.des,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -73,7 +73,7 @@ def Update(id):
 		infra.title  = request.form.get('title')
 		img =   request.files.getlist('img')
 		infra.des  = request.form.get('des')
-		infra.lang_id = request.form.get('lang_id')
+		#infra.lang_id = request.form.get('lang_id')
 		
 	
 		if len(img) == 0:

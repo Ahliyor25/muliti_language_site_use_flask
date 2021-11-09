@@ -17,12 +17,16 @@ def CreateSlider():
 	
 	_name = request.form.get('name')
 	img = request.files.getlist('img')
-	_lang_id = request.form.get('lang_id')
+	#_lang_id = request.form.get('lang_id')
 	
 	try:
 		_img = upload_image(img)
 
-		row = Slider( name = _name, img = _img, lang_id = _lang_id )
+		row = Slider(
+		name = _name,
+		img = _img,
+		#lang_id = _lang_id
+		)
 
 		row.save()
 		
@@ -43,7 +47,7 @@ def GetSlider():
 				"id" : i.id,
 				"name": i.name,
 				"img": host + i.img,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -62,7 +66,7 @@ def UpdateSlider(id):
 		
 		slider.name  = request.form.get('name')
 		img =   request.files.getlist('img')
-		slider.lang_id = request.form.get('lang_id')
+		#slider.lang_id = request.form.get('lang_id')
 		
 	
 		if len(img) == 0:

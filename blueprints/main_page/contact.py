@@ -20,7 +20,7 @@ def Create():
 	_text_button = request.json.get('text_button')
 	_longitude = request.json.get('longitude')
 	_latitude = request.json.get('latitude')
-	_lang_id = request.json.get('lang_id')
+	#_lang_id = request.json.get('lang_id')
 
 	try:
 		
@@ -33,7 +33,7 @@ def Create():
 		text_button = _text_button,
 		longitude = _longitude,
 		latitude = _latitude,
-		lang_id = _lang_id
+		#lang_id = _lang_id
 		)
 		row.save()
 
@@ -62,7 +62,7 @@ def Get():
 				"text_button": i.text_button,
 				"longitude": i.longitude,
 				"latitude": i.latitude,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -86,7 +86,7 @@ def Update(id):
 		contact.text_button  = request.json.get('text_button') 
 		contact.longitude  = request.json.get('longitude')
 		contact.latitude  = request.json.get('latitude')
-		contact.lang_id = request.json.get('lang_id')
+		#contact.lang_id = request.json.get('lang_id')
 		contact.save()
 		return  jsonify('done')
 	except Exception as e:

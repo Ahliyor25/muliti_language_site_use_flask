@@ -15,8 +15,8 @@ from werkzeug.utils import find_modules, import_string
 
 
 class helper_var:
-    host = "http://192.168.0.107:3000/getimg/"
-    path = 'C:\\mbc\\'
+    host = "http://192.168.0.103:3000/getimg/"
+    path = 'C:\\bahtz\\muliti_language_site_use_flask'
 
 
 
@@ -43,32 +43,14 @@ def register_blueprints_main_page(app):
         if hasattr(mod, 'bp'):
             app.register_blueprint(mod.bp)
 
-
-# * Images
-
-
-def get_id_of_image():
+def register_blueprints_residence(app):
     """
-    Get id of image in data.json
+    Searches all blueprints in folder blueprints/residence
     """
-    with open('data.json') as _file:
-        data = json.load(_file)
-
-    return data['avatar']
-
-
-def update_id_name():
-    """
-    Update id of image in data.json
-    """
-    with open('data.json') as _file:
-        data = json.load(_file)
-
-    data['avatar'] += 1
-
-    with open('data.json', 'w') as _file:
-        json.dump(data, _file)
-
+    for name in find_modules('blueprints.residence'):
+        mod = import_string(name)
+        if hasattr(mod, 'bp'):
+            app.register_blueprint(mod.bp)
 
 
 def hash_string_sha256(to_hash):
@@ -77,12 +59,11 @@ def hash_string_sha256(to_hash):
     """
     return sha256(to_hash.encode()).hexdigest()
 
-def  img_add():
-  pass
-
 
 def upload_image(files):
-
+    """
+    Upload image use form data
+    """
     target = os.path.join(helper_var.path, 'images')
     if not os.path.isdir(target):
         os.mkdir(target)

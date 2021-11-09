@@ -18,12 +18,12 @@ def CreateAdvantage():
 	_title = request.form.get('title')
 	icon = request.files.getlist('icon')
 	_des = request.form.get('des')
-	_lang_id = request.form.get('lang_id')
+	#_lang_id = request.form.get('lang_id')
 	
 	try:
 		_icon = upload_image(icon)
 
-		row = SectionThree(title = _title, icon = _icon, des = _des, lang_id = _lang_id)
+		row = SectionThree(title = _title, icon = _icon, des = _des)
 
 		row.save()
 	
@@ -45,7 +45,7 @@ def GetAdvantage():
 				"title": i.title,
 				"icon": host + i.icon,
 				"des" : i.des,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -65,7 +65,7 @@ def UpAdvantage(id):
 		advantage.title  = request.form.get('name')
 		icon =   request.files.getlist('icon')
 		advantage.des  = request.form.get('des')
-		advantage.lang_id = request.form.get('lang_id')
+		#advantage.lang_id = request.form.get('lang_id')
 		
 	
 		if len(icon) == 0:

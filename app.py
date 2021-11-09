@@ -8,7 +8,8 @@ from flask import Flask, send_file
 from flask_cors import CORS
 from utils import (
   register_blueprints_login,
-  register_blueprints_main_page
+  register_blueprints_main_page,
+  register_blueprints_residence
 )
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
@@ -27,6 +28,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=48)
 
 register_blueprints_login(app)
 register_blueprints_main_page(app)
+register_blueprints_residence(app)
 
 
 @app.route('/getimg/<name>')

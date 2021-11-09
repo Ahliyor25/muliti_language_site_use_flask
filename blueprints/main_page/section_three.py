@@ -19,12 +19,14 @@ def CreateSectionThree():
 	img = request.files.getlist('img')
 	_title = request.form.get('title')
 	_des = request.form.get('des')
-	_lang_id = request.form.get('lang_id')
+	#_lang_id = request.form.get('lang_id')
 	
 	try:
 		_img = upload_image(img)
 
-		row = SectionThree(title = _title, img = _img, des = _des, lang_id = _lang_id)
+		row = SectionThree(title = _title, img = _img, des = _des,
+		 #lang_id = _lang_id,
+		 )
 
 		row.save()
 	
@@ -46,7 +48,7 @@ def GetAdvantage():
 				"title": i.title,
 				"img": host + i.img,
 				"des" : i.des,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		

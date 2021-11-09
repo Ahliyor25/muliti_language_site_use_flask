@@ -15,7 +15,7 @@ def Create():
 	_title = request.json.get('title')
 	_des = request.json.get('des')
 	_text_button = request.json.get('text_button')
-	_lang_id = request.json.get('lang_id')
+	#_lang_id = request.json.get('lang_id')
 
 	try:
 		
@@ -23,7 +23,7 @@ def Create():
 		title = _title,
 		des = _des,
 		text_button = _text_button,
-		lang_id = _lang_id
+		#lang_id = _lang_id
 		)
 		row.save()
 
@@ -47,7 +47,7 @@ def Get():
 				"title": i.title,
 				"des" : i.des,
 				"text_button": i.text_button,
-				"lang_id" : Lang.get(Lang.id == i.lang_id).title
+				#"lang_id" : Lang.get(Lang.id == i.lang_id).title
 			})
 		return jsonify(js)
 		
@@ -66,7 +66,7 @@ def Update(id):
 		cta.title  = request.json.get('title')
 		cta.des  = request.json.get('des')
 		cta.text_button  = request.json.get('') 
-		cta.lang_id = request.json.get('lang_id')
+		#cta.lang_id = request.json.get('lang_id')
 		cta.save()
 		return  jsonify('done')
 	except Exception as e:

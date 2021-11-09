@@ -2,7 +2,6 @@ from peewee import *
 from peeweedbevolve import * 
 from  config import config
 
-db = SqliteDatabase('db1.db')
 
 db = MySQLDatabase(
     config.db_name,
@@ -37,21 +36,21 @@ class Slider(BaseModel):
     id = AutoField()
     name = CharField(max_length=100)
     img = CharField(max_length=256)
-    lang_id = ForeignKeyField(Lang, related_name="sliders",)
+    #lang_id = ForeignKeyField(Lang, related_name="sliders",)
 
 class SectionThree(BaseModel):
     id= AutoField()
     title = CharField(max_length=255)
     icon = CharField(max_length=255)
     des = TextField()
-    lang_id = ForeignKeyField(Lang, related_name="advantages",)
+    #lang_id = ForeignKeyField(Lang, related_name="advantages",)
 
 class SectionThree(BaseModel):
     id = AutoField()
     img  = CharField(max_length=255)
     title = CharField(max_length=255)
     des = TextField()
-    lang_id = ForeignKeyField(Lang, related_name='sectionthrees')
+    #lang_id = ForeignKeyField(Lang, related_name='sectionthrees')
 
 class SectionFour(BaseModel):
     id =AutoField()
@@ -61,7 +60,7 @@ class SectionFour(BaseModel):
     youtube_button_text = CharField(max_length=20)
     text_advantage =  TextField()
     text_button = CharField(max_length=20)
-    lang_id = ForeignKeyField(Lang, related_name="sectionfours")
+    #lang_id = ForeignKeyField(Lang, related_name="sectionfours")
 
 
  
@@ -70,7 +69,7 @@ class Infrastructure(BaseModel):
     title = CharField(max_length=200)
     img = CharField(max_length=255)
     des = TextField()
-    lang_id = ForeignKeyField(Lang, related_name="infrastructure")
+    #lang_id = ForeignKeyField(Lang, related_name="infrastructure")
 
 
 class Gallery(BaseModel):
@@ -83,7 +82,7 @@ class CallToAction(BaseModel):
     title = CharField(max_length=255)
     des = TextField()
     text_button = CharField(max_length=20)
-    lang_id = ForeignKeyField(Lang, related_name="calltoactions")
+    #lang_id = ForeignKeyField(Lang, related_name="calltoactions")
 
 class Contact(BaseModel):
     id = AutoField()
@@ -95,14 +94,14 @@ class Contact(BaseModel):
     text_button = CharField(max_length=30)
     longitude = CharField(max_length=50)
     latitude = CharField(max_length=50)
-    lang_id = ForeignKeyField(Lang, related_name="contacts")
+    #lang_id = ForeignKeyField(Lang, related_name="contacts")
 
 
 class Residence(BaseModel):
     id = AutoField()
     name = CharField(max_length=255)
     img = CharField(max_length=255)
-    lang_id  = ForeignKeyField(Lang, related_name="Residences")
+    #lang_id  = ForeignKeyField(Lang, related_name="Residences")
 
 
 class Block(BaseModel):
@@ -110,7 +109,7 @@ class Block(BaseModel):
     name = CharField(max_length=255)
     img = CharField(max_length=255)
     residence = ForeignKeyField(Lang, related_name = "residences")
-    lang_id  = ForeignKeyField(Lang, related_name = "blocks")
+    #lang_id  = ForeignKeyField(Lang, related_name = "blocks")
 
 class Layout(BaseModel):
     id = AutoField()
